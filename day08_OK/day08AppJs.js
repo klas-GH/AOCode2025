@@ -105,14 +105,14 @@ function run() {
     if (pa!==pb) parent[pa]=pb;
   };
 
-  let groupsCount = n;
   let lastEdge = null;
-
+  let roots = new Set();
   // union the first 1000 edges already used
   for (let i=0; i<n; i++) {
-    for (let j of graph[i]) 
-      union(i,j);
+    for (let j of graph[i]) union(i,j);
+    roots.add(find(i));
   }
+  let groupsCount = roots.size; // update groups count
 
   while (groupsCount > 1) {
     let e = heap.pop();

@@ -60,12 +60,14 @@ def run():
             return True
         return False
 
+    roots = set()
     # union the first 1000 edges already used
     for i in range(n):
         for j in graph[i]:
             union(i, j)
+        roots.add(find(i))
 
-    groups_count = len({find(i) for i in range(n)})
+    groups_count = len(roots)
     last_edge = None
 
     while groups_count > 1 and edges:
